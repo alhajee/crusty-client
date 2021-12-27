@@ -9,6 +9,47 @@ import 'react-table-6/react-table.css'
 const Wrapper = styled.div`
     padding: 0 40px 40px 40px;
 `
+// styling for update button
+const Update = styled.div`
+    color: #ef9b0f;
+    cursor: pointer;
+`
+// styling for delete button
+const Delete = styled.div`
+    color: #ff0000;
+    cursor: pointer;
+`
+
+class UpdateGrocery extends Component {
+    updateUser = event => {
+        event.preventDefault()
+
+        window.location.href = `/groceries/update/${this.props.id}`
+    }
+
+    render() {
+        return <Update onClick={this.updateUser}>Update</Update>
+    }
+}
+
+class DeleteGrocery extends Component {
+    deleteUser = event => {
+        event.preventDefault()
+
+        if (
+            window.confirm(
+                `Do you want to delete the grocery ${this.props.id} permanently?`,
+            )
+        ) {
+            api.deleteGroceryById(this.props.id)
+            window.location.reload()
+        }
+    }
+
+    render() {
+        return <Delete onClick={this.deleteUser}>Delete</Delete>
+    }
+}
 
 class GroceriesList extends Component {
     constructor(props) {
@@ -61,6 +102,28 @@ class GroceriesList extends Component {
                 accessor: 'price',
                 filterable: true,
                 Cell: props => <span>₦{props.value}</span>,
+            },
+            {
+                Header: '',
+                accessor: '',
+                Cell: function(props) {
+                    return (
+                        <span>
+                            <DeleteGrocery id={props.original._id} />
+                        </span>
+                    )
+                },
+            },
+            {
+                Header: '',
+                accessor: '',
+                Cell: function(props) {
+                    return (
+                        <span>
+                            <UpdateGrocery id={props.original._id} />
+                        </span>
+                    )
+                },
             },
         ]
 
