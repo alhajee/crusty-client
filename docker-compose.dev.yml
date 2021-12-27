@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  app:
+    container_name: crusty-client
+    image: crusty-client
+    build:
+      context: .
+      target: development
+    volumes:
+      - ./src:/home/app/src
+    ports:
+      - 3000:3000
