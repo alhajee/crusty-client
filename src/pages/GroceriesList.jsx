@@ -21,14 +21,13 @@ const Delete = styled.div`
 `
 
 class UpdateGrocery extends Component {
-    updateUser = event => {
+    updateGrocery = event => {
         event.preventDefault()
-
         window.location.href = `/groceries/update/${this.props.id}`
     }
 
     render() {
-        return <Update onClick={this.updateUser}>Update</Update>
+        return <Update onClick={this.updateGrocery}>Update</Update>
     }
 }
 
@@ -42,7 +41,9 @@ class DeleteGrocery extends Component {
             )
         ) {
             api.deleteGroceryById(this.props.id)
-            window.location.reload()
+            .then(
+                window.location.reload()
+            )
         }
     }
 
