@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  app:
+    container_name: crusty-client-prod
+    image: crusty-client-prod
+    build:
+      context: .
+      target: production
