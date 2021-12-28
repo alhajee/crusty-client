@@ -16,7 +16,7 @@ PORT=3000
 
 ## Docker compose for production
 
-To build the docker container on a local machine:
+To build the docker container for production:
 
 ```shell
 docker-compose -f docker-compose.prod.yml build
